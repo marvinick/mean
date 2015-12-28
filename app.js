@@ -1,4 +1,4 @@
-var app = angular.module("flipperNews", []);
+var app = angular.module("flipperNews", ['ui.router']);
 
 app.factory("posts", [function() {
 	var o = {
@@ -30,3 +30,18 @@ app.controller("MainCtrl", [
 			post.upvotes++;
 		};
 }]);
+
+app.config([
+	'$stateProvider',
+	'$urlRouterProvider',
+
+	function($stateProvider, $urlRouterProvider) {
+		$stateProvider
+			.state('home', {
+				url: '/home',
+				templateUrl: '/home.html',
+				controller: "MainCtrl"
+			});
+			
+		$urlRouterProvider.otherwise('home');
+	}]);
